@@ -41,17 +41,17 @@ set_target_properties(cmd_line PROPERTIES OUTPUT_NAME voro++
   RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/src") 
 install(TARGETS cmd_line RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
 
-file(GLOB EXAMPLE_SOURCES examples/*/*.cc) 
-foreach(SOURCE ${EXAMPLE_SOURCES})
-  string(REGEX REPLACE "^.*/([^/]*)\\.cc$" "\\1" PROGNAME "${SOURCE}")
-  if (NOT PROGNAME STREQUAL ellipsoid) #ellipsoid is broken
-    string(REGEX REPLACE "^.*/(examples/.*)/${PROGNAME}\\.cc$" "\\1" DIRNAME "${SOURCE}")
-    add_executable(${PROGNAME} ${SOURCE})
-    target_link_libraries(${PROGNAME} PRIVATE voro++)
-    set_target_properties(${PROGNAME} PROPERTIES 
-      RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${DIRNAME}" )
-  endif()
-endforeach(SOURCE)
+#file(GLOB EXAMPLE_SOURCES examples/*/*.cc) 
+#foreach(SOURCE ${EXAMPLE_SOURCES})
+#  string(REGEX REPLACE "^.*/([^/]*)\\.cc$" "\\1" PROGNAME "${SOURCE}")
+#  if (NOT PROGNAME STREQUAL ellipsoid) #ellipsoid is broken
+#    string(REGEX REPLACE "^.*/(examples/.*)/${PROGNAME}\\.cc$" "\\1" DIRNAME "${SOURCE}")
+#    add_executable(${PROGNAME} ${SOURCE})
+#    target_link_libraries(${PROGNAME} PRIVATE voro++)
+#    set_target_properties(${PROGNAME} PROPERTIES 
+#      RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${DIRNAME}" )
+#  endif()
+#endforeach(SOURCE)
 
 file(GLOB_RECURSE VORO_HEADERS src/voro++.hh)
 install(FILES ${VORO_HEADERS} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
